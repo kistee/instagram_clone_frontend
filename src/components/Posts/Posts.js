@@ -56,13 +56,17 @@ export default class Posts extends Component {
 						Accept: "application/json",
 					},
 				}
-			).then((response) => {
-				this.setState({ posts: response.data.posts });
-				localStorage.setItem(
-					"posts",
-					JSON.stringify(response.data.posts)
-				);
-			});
+			)
+				.then((response) => {
+					this.setState({ posts: response.data.posts });
+					localStorage.setItem(
+						"posts",
+						JSON.stringify(response.data.posts)
+					);
+				})
+				.catch(function (e) {
+					console.log(e);
+				});
 
 			//  subscribe to posts channel
 			this.posts_channel = this.props.pusher.subscribe("posts-channel");

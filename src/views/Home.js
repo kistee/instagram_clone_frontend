@@ -8,7 +8,8 @@ import "./Home.css";
 import Pusher from "pusher-js";
 
 const client = new ApolloClient({
-	uri: "/.netlify/functions/graphql",
+	uri:
+		"https://laughing-mclean-3cdade.netlify.app/.netlify/functions/graphql",
 });
 
 export default class Home extends Component {

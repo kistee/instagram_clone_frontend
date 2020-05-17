@@ -1,0 +1,6 @@
+.Page-content-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 53px;
+}

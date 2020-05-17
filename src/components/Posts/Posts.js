@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 import Post from "../Post/Post";
 import Notifier from "../Notifier/Notifier";
 import { NoFragmentCyclesRule } from "graphql/validation";
+import axios from "axios";
 
 export default class Posts extends Component {
 	constructor() {
@@ -47,16 +48,10 @@ export default class Posts extends Component {
 			// 		);
 			// 	});
 
-			fetch(
-				"https://laughing-mclean-3cdade.netlify.app/.netlify/functions/getposts",
-				{
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/json",
-					},
-				}
-			)
+			axios
+				.get(
+					"https://laughing-mclean-3cdade.netlify.app/.netlify/functions/getposts"
+				)
 				.then((response) => {
 					this.setState({ posts: response.data.posts });
 					localStorage.setItem(

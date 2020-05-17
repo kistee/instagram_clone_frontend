@@ -24,44 +24,44 @@ export default class Posts extends Component {
 		if (!navigator.onLine) {
 			this.setState({ posts: JSON.parse(localStorage.getItem("posts")) });
 		} else {
-			// this.props.apollo_client
-			// 	.query({
-			// 		query: gql`
-			// 			{
-			// 				posts(user_id: "a") {
-			// 					id
-			// 					user {
-			// 						nickname
-			// 						avatar
-			// 					}
-			// 					image
-			// 					caption
-			// 				}
-			// 			}
-			// 		`,
-			// 	})
-			// 	.then((response) => {
-			// 		this.setState({ posts: response.data.posts });
-			// 		localStorage.setItem(
-			// 			"posts",
-			// 			JSON.stringify(response.data.posts)
-			// 		);
-			// 	});
-
-			axios
-				.get(
-					"https://laughing-mclean-3cdade.netlify.app/.netlify/functions/getposts"
-				)
+			this.props.apollo_client
+				.query({
+					query: gql`
+						{
+							posts(user_id: "a") {
+								id
+								user {
+									nickname
+									avatar
+								}
+								image
+								caption
+							}
+						}
+					`,
+				})
 				.then((response) => {
 					this.setState({ posts: response.data.posts });
 					localStorage.setItem(
 						"posts",
 						JSON.stringify(response.data.posts)
 					);
-				})
-				.catch(function (e) {
-					console.log(e);
 				});
+
+			// axios
+			// 	.get(
+			// 		"https://laughing-mclean-3cdade.netlify.app/.netlify/functions/getposts"
+			// 	)
+			// 	.then((response) => {
+			// 		this.setState({ posts: response.data.posts });
+			// 		localStorage.setItem(
+			// 			"posts",
+			// 			JSON.stringify(response.data.posts)
+			// 		);
+			// 	})
+			// 	.catch(function (e) {
+			// 		console.log(e);
+			// 	});
 
 			//  subscribe to posts channel
 			this.posts_channel = this.props.pusher.subscribe("posts-channel");
